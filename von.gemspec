@@ -19,12 +19,12 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.2'
 
-  gem.add_dependency 'redis', '~> 3.0.2'
-  gem.add_dependency 'activesupport', '~> 3.2.11'
+  gem.add_dependency 'redis', '~> 4.7'
+  gem.add_dependency 'activesupport', '~> 5.2.4'
 
   gem.add_development_dependency 'rake', '>= 10.0.3'
-  gem.add_development_dependency 'minitest', '>= 3.0.0'
+  gem.add_development_dependency 'minitest', '>= 5.0.0'
   gem.add_development_dependency 'fakeredis', '>= 0.4.1'
-  gem.add_development_dependency 'mocha', '>= 0.11.4'
+  gem.add_development_dependency 'mocha', '~> 2.1.0'
   gem.add_development_dependency 'timecop', '>= 0.5.9.1'
 end
