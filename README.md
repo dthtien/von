@@ -1,4 +1,4 @@
-# Von [![Build Status]((https://github.com/dthtien/von/actions/workflows/ci.yml/badge.svg))](https://github.com/dthtien/von/actions)
+# Von [![Build Status](https://github.com/dthtien/von/actions/workflows/ci.yml/badge.svg)](https://github.com/dthtien/von/actions)
 
 **This repository is a fork of https://github.com/trvsdnn/von, created to maintain the gem and keep it active.**
 Von is an opinionated Redis stats tracker. It works with keys, you choose one, Von increments it. It has a few built in conveniences:
