@@ -14,10 +14,10 @@ describe Von::Counters::Total do
     counter = TotalCounter.new('foo')
 
     counter.increment
-    @redis.hget('von:counters:foo', 'total').must_equal '1'
+    assert_equal @redis.hget('von:counters:foo', 'total'), '1'
 
     counter.increment(5)
-    @redis.hget('von:counters:foo', 'total').must_equal '6'
+    assert_equal @redis.hget('von:counters:foo', 'total'), '6'
   end
 
   it "gets a total count for a counter" do
@@ -26,8 +26,6 @@ describe Von::Counters::Total do
     counter.increment(3)
     counter.increment
 
-    counter.count.must_equal 5
+    assert_equal counter.count, 5
   end
-
-
 end

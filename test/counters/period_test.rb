@@ -18,9 +18,9 @@ describe Von::Counters::Period do
     counter.increment
     counter.increment(5)
 
-    @redis.hget('von:counters:foo:month', '2013-01').must_equal '6'
-    @redis.lrange('von:lists:foo:month', 0, -1).size.must_equal 1
-    @redis.lrange('von:lists:foo:month', 0, -1).first.must_equal '2013-01'
+    assert_equal @redis.hget('von:counters:foo:month', '2013-01'), '6'
+    assert_equal @redis.lrange('von:lists:foo:month', 0, -1).size, 1
+    assert_equal @redis.lrange('von:lists:foo:month', 0, -1).first, '2013-01'
   end
 
   it 'increments a minute counter' do
@@ -31,9 +31,9 @@ describe Von::Counters::Period do
     counter.increment
     counter.increment(5)
 
-    @redis.hget('von:counters:foo:minute', '2013-01-01 01:01').must_equal '6'
-    @redis.lrange('von:lists:foo:minute', 0, -1).size.must_equal 1
-    @redis.lrange('von:lists:foo:minute', 0, -1).first.must_equal '2013-01-01 01:01'
+    assert_equal @redis.hget('von:counters:foo:minute', '2013-01-01 01:01'), '6'
+    assert_equal @redis.lrange('von:lists:foo:minute', 0, -1).size, 1
+    assert_equal @redis.lrange('von:lists:foo:minute', 0, -1).first, '2013-01-01 01:01'
   end
 
   it "expires counters past the limit" do
@@ -45,9 +45,9 @@ describe Von::Counters::Period do
     Timecop.freeze(Time.local(2013, 02))
     counter.increment(5)
 
-    @redis.hget('von:counters:foo:month', '2013-02').must_equal '5'
-    @redis.lrange('von:lists:foo:month', 0, -1).size.must_equal 1
-    @redis.lrange('von:lists:foo:month', 0, -1).first.must_equal '2013-02'
+    assert_equal @redis.hget('von:counters:foo:month', '2013-02'), '5'
+    assert_equal @redis.lrange('von:lists:foo:month', 0, -1).size, 1
+    assert_equal @redis.lrange('von:lists:foo:month', 0, -1).first, '2013-02'
   end
 
 
@@ -64,8 +64,8 @@ describe Von::Counters::Period do
     Timecop.freeze(Time.local(2013, 02, 01, 9))
     counter.increment
 
-    counter.count(:month).must_equal [{ timestamp: "2013-02", count: 6 }]
-    counter.count(:hour).must_equal [
+    assert_equal counter.count(:month), [{ timestamp: "2013-02", count: 6 }]
+    assert_equal counter.count(:hour), [
       { timestamp: "2013-02-01 04:00", count: 0 },
       { timestamp: "2013-02-01 05:00", count: 0 },
       { timestamp: "2013-02-01 06:00", count: 0 },
@@ -74,5 +74,4 @@ describe Von::Counters::Period do
       { timestamp: "2013-02-01 09:00", count: 1 }
     ]
   end
-
 end

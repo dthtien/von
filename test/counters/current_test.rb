@@ -17,8 +17,8 @@ describe Von::Counters::Current do
     Timecop.freeze(Time.local(2013, 01, 02))
     3.times { counter.increment(2) }
 
-    @redis.hget('von:counters:currents:foo:day', 'timestamp').must_equal '2013-01-02'
-    @redis.hget('von:counters:currents:foo:day', 'total').must_equal '6'
+    assert_equal @redis.hget('von:counters:currents:foo:day', 'timestamp'), '2013-01-02'
+    assert_equal @redis.hget('von:counters:currents:foo:day', 'total'), '6'
   end
 
   it "increments the current counter for multiple periods" do
@@ -31,11 +31,11 @@ describe Von::Counters::Current do
     Timecop.freeze(Time.local(2013, 01, 20, 06, 10))
     3.times { counter.increment(2) }
 
-    @redis.hget('von:counters:currents:foo:minute', 'timestamp').must_equal '2013-01-20 06:10'
-    @redis.hget('von:counters:currents:foo:minute', 'total').must_equal '6'
+    assert_equal @redis.hget('von:counters:currents:foo:minute', 'timestamp'), '2013-01-20 06:10'
+    assert_equal @redis.hget('von:counters:currents:foo:minute', 'total'), '6'
 
-    @redis.hget('von:counters:currents:foo:week', 'timestamp').must_equal '2013-01-14'
-    @redis.hget('von:counters:currents:foo:week', 'total').must_equal '6'
+    assert_equal @redis.hget('von:counters:currents:foo:week', 'timestamp'), '2013-01-14'
+    assert_equal @redis.hget('von:counters:currents:foo:week', 'total'), '6'
   end
 
   it "counts acurrent counter for a period" do
@@ -48,8 +48,7 @@ describe Von::Counters::Current do
     Timecop.freeze(Time.local(2013, 01, 01, 06, 10))
     3.times { counter.increment(2) }
 
-    counter.count(:minute).must_equal 6
-    counter.count(:day).must_equal 10
+    assert_equal counter.count(:minute), 6
+    assert_equal counter.count(:day), 10
   end
-
 end
