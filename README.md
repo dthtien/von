@@ -128,7 +128,7 @@ end
 
 Add this line to your application's Gemfile:
 
-    gem 'von'
+    gem 'von', git: 'https://github.com/dthtien/von'
 
 And then execute:
 
