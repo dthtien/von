@@ -1,5 +1,6 @@
-# Von [![Build Status](https://travis-ci.org/blahed/von.png?branch=master)](https://travis-ci.org/blahed/von)
+# Von [![Build Status]((https://github.com/dthtien/von/actions/workflows/ci.yml/badge.svg))](https://github.com/dthtien/von/actions)
 
+**This repository is a fork of https://github.com/trvsdnn/von, created to maintain the gem and keep it active.**
 Von is an opinionated Redis stats tracker. It works with keys, you choose one, Von increments it. It has a few built in conveniences:
 
 ## Requirements
@@ -106,7 +107,7 @@ Von.configure do |config|
     config.redis = Redis.current
     # Initialize a new Redis connection given options
     config.redis = { host: 'localhost', port: 6379 }
-    
+
     # rescue Redis connection errors
     # if the connection fails, no errors are raised by default
     config.raise_connection_errors = false

@@ -6,11 +6,11 @@ require 'von/version'
 Gem::Specification.new do |gem|
   gem.name          = "von"
   gem.version       = Von::VERSION
-  gem.authors       = ["blahed"]
-  gem.email         = ["tdunn13@gmail.com"]
+  gem.authors       = ["dthtien"]
+  gem.email         = ["dthtien@gmail.com"]
   gem.description   = "Von is an opinionated Redis stats tracker."
   gem.summary       = "Von is an opinionated Redis stats tracker."
-  gem.homepage      = "https://github.com/blahed/von"
+  gem.homepage      = "https://github.com/dthtien/von"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
