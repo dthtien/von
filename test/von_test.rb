@@ -11,24 +11,24 @@ describe Von do
 
   it "increments a counter and counts it" do
     3.times { Von.increment('foo') }
-    Von.count('foo').total.must_equal 3
+    assert_equal Von.count('foo').total, 3
   end
 
   it "increments a counter by given value and counts it" do
     3.times { Von.increment('foo', 5) }
-    Von.count('foo').total.must_equal 15
+    assert_equal Von.count('foo').total, 15
   end
 
   it "increments a counter and parent counters and counts them" do
     3.times { Von.increment('foo:bar') }
-    Von.count('foo').total.must_equal 3
-    Von.count('foo:bar').total.must_equal 3
+    assert_equal Von.count('foo').total, 3
+    assert_equal Von.count('foo:bar').total, 3
   end
 
   it "increments a counter and parent counters by given value and counts them" do
     3.times { Von.increment('foo:bar', 5) }
-    Von.count('foo').total.must_equal 15
-    Von.count('foo:bar').total.must_equal 15
+    assert_equal Von.count('foo').total, 15
+    assert_equal Von.count('foo:bar').total, 15
   end
 
   it "increments period/best counters and counts them" do
@@ -43,15 +43,17 @@ describe Von do
     Timecop.freeze(Time.local(2013, 03, 04))
     Von.increment('foo')
 
-    Von.count('foo').best(:day).must_equal({ timestamp: "2013-02-03", count: 3 })
-    Von.count('foo').per(:month).must_equal [{ timestamp: "2013-02", count: 3 }, { timestamp: "2013-03", count: 1 }]
+    assert_equal Von.count('foo').best(:day), { timestamp: "2013-02-03", count: 3 }
+    assert_equal Von.count('foo').per(:month), [{ timestamp: "2013-02", count: 3 }, { timestamp: "2013-03", count: 1 }]
   end
 
   it "raises a Redis connection errors if raise_connection_errors is true" do
     Von.config.raise_connection_errors = true
     Von.expects(:increment).raises(Redis::CannotConnectError)
 
-    lambda { Von.increment('foo') }.must_raise Redis::CannotConnectError
+    assert_raises Redis::CannotConnectError do
+      Von.increment('foo')
+    end
   end
 
 end

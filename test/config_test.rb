@@ -8,13 +8,13 @@ describe Von::Config do
   end
 
   it 'intiializes a config with defaults' do
-    @config.namespace.must_equal 'von'
-    @config.hourly_format.must_equal '%Y-%m-%d %H:00'
+    assert_equal @config.namespace, 'von'
+    assert_equal @config.hourly_format, '%Y-%m-%d %H:00'
   end
 
   it 'initializes a config and overloads it with a block' do
     @config.namespace = 'something'
-    @config.namespace.must_equal 'something'
+    assert_equal @config.namespace, 'something'
   end
 
   it "sets periods via counter method" do
@@ -22,11 +22,11 @@ describe Von::Config do
       config.counter 'bar', monthly: 3, daily: 6
     end
 
-    Von.config.periods[:bar].length.must_equal 2
-    Von.config.periods[:bar].first.name.must_equal :monthly
-    Von.config.periods[:bar].first.length.must_equal 3
-    Von.config.periods[:bar].last.name.must_equal :daily
-    Von.config.periods[:bar].last.length.must_equal 6
+    assert_equal Von.config.periods[:bar].length, 2
+    assert_equal Von.config.periods[:bar].first.name, :monthly
+    assert_equal Von.config.periods[:bar].first.length, 3
+    assert_equal Von.config.periods[:bar].last.name, :daily
+    assert_equal Von.config.periods[:bar].last.length, 6
   end
 
   it "sets bests via counter method" do
@@ -35,12 +35,12 @@ describe Von::Config do
       config.counter 'foo', best: [:month, :year]
     end
 
-    Von.config.bests[:bar].first.must_be_instance_of Von::Period
-    Von.config.bests[:bar].first.name.must_equal :daily
-    Von.config.bests[:foo].first.must_be_instance_of Von::Period
-    Von.config.bests[:foo].first.name.must_equal :monthly
-    Von.config.bests[:foo].last.must_be_instance_of Von::Period
-    Von.config.bests[:foo].last.name.must_equal :yearly
+    assert Von.config.bests[:bar].first.is_a? Von::Period
+    assert_equal Von.config.bests[:bar].first.name, :daily
+    assert Von.config.bests[:foo].first.is_a? Von::Period
+    assert_equal Von.config.bests[:foo].first.name, :monthly
+    assert Von.config.bests[:foo].last.is_a? Von::Period
+    assert_equal Von.config.bests[:foo].last.name, :yearly
   end
 
   it "sets currents via counter method" do
@@ -49,12 +49,11 @@ describe Von::Config do
       config.counter 'foo', current: [:month, :year]
     end
 
-    Von.config.currents[:bar].first.must_be_instance_of Von::Period
-    Von.config.currents[:bar].first.name.must_equal :daily
-    Von.config.currents[:foo].first.must_be_instance_of Von::Period
-    Von.config.currents[:foo].first.name.must_equal :monthly
-    Von.config.currents[:foo].last.must_be_instance_of Von::Period
-    Von.config.currents[:foo].last.name.must_equal :yearly
+    assert Von.config.currents[:bar].first.is_a? Von::Period
+    assert_equal Von.config.currents[:bar].first.name, :daily
+    assert Von.config.currents[:foo].first.is_a? Von::Period
+    assert_equal Von.config.currents[:foo].first.name, :monthly
+    assert Von.config.currents[:foo].last.is_a? Von::Period
+    assert_equal Von.config.currents[:foo].last.name, :yearly
   end
-
 end
